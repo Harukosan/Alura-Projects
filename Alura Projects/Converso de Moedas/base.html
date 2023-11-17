@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Conversor de Moedas</title>
+</head>
+<body>
+
+  <h1>Conversor de Moedas</h1>
+
+  <form id="converterForm">
+    <label for="amount">Valor:</label>
+    <input type="number" id="amount" placeholder="Insira o valor" required>
+
+    <label for="from">De:</label>
+    <select id="from">
+      <option value="USD">Dólar Americano (USD)</option>
+      <!-- Adicione outras moedas conforme necessário -->
+    </select>
+
+    <label for="to">Para:</label>
+    <select id="to">
+      <option value="BRL">Real Brasileiro (BRL)</option>
+      <!-- Adicione outras moedas conforme necessário -->
+    </select>
+
+    <button type="button" onclick="converterMoeda()">Converter</button>
+  </form>
+
+  <h2>Resultado:</h2>
+  <p id="resultado"></p>
+
+  <script>
+    function converterMoeda() {
+      const amount = document.getElementById('amount').value;
+      const from = document.getElementById('from').value;
+      const to = document.getElementById('to').value;
+
+      // Substitua SUA_CHAVE_API pela chave real obtida no site da API
+      const apiKey = 'b6f857c0849146e1bcbec99a40985506';
+      const apiUrl = `https://open.er-api.com/v6/latest/${from}?apikey=${apiKey}`;
+
+      fetch(apiUrl)
+        .then(response => response.json())
+        .then(data => {
+          const taxaCambio = data.rates[to];
+          const resultado = (amount * taxaCambio).toFixed(2);
+          document.getElementById('resultado').textContent = `${amount} ${from} é igual a ${resultado} ${to}`;
+        })
+        .catch(error => console.error('Erro ao obter as taxas de câmbio:', error));
+    }
+  </script>
+
+</body>
+</html>

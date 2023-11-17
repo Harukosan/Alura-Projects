@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogo de Adivinhação</title>
+    <link rel="stylesheet" href="base.css">
+</head>
+<body>
+    <div class="container">
+      <h1 class="page-title">
+        Desafio do Chute
+      </h1>
+      <p class="page-title">Será que você consegue acertar o número correto com o menor número possível de tentativas?</p>
+      <img src="https://www.alura.com.br/assets/img/imersoes/dev-2021/logo-imersao-aluraflix.svg" class="page-logo" alt="">
+    </div>
+    <a href="https://alura.com.br/" target="_blank">
+      <img src="https://www.alura.com.br/assets/img/home/alura-logo.svg" alt="" class="alura-logo">
+    </a>
+    <a href="https://github.com/Harukosan" target="_blank">
+      <img src="https://github.githubassets.com/assets/GitHub-Logo-ee398b662d42.png" class="github-logo" alt="">
+    </a>
+    <img src="https://caelum-online-public.s3.amazonaws.com/assets-imersaodev/Ilustra%C3%A7%C3%A3o-c%C3%A9rebro+1.png">
+    <br>
+    <button class="playbutton" onclick="playGame()">Começar o Jogo</button>
+    <input class="input" hidden>
+
+    <script>
+      function playGame() {
+    //Use isso pra fazer comentarios
+    //parseInt Math.random() * 1001 pode ser usado pra gerar um numero aleatorio
+    
+    var numeroDaSorte = parseInt(Math.random() * 101);
+    var tentativas = 0;
+    //Abaixo se pode definir o limite de tentativas desejado
+    var limiteDeTentativas = 7;
+
+    //while pode ser usado pra repetir alguma operação
+    while(chute != numeroDaSorte && tentativas < limiteDeTentativas) {
+      var chute = prompt('Digite um numero entre 1 e 100\nTentativas restantes: ' + (limiteDeTentativas - tentativas));
+        // Se o usuário deixou o campo em branco ou inseriu algo que não é um número
+        if (chute === '' || isNaN(chute)) {
+        alert('Por favor, insira um número válido.');
+        continue; // Reiniciar o loop
+      }
+      tentativas++;
+        // Se o usuário pressionar "Cancelar"
+        if (chute === null) {
+        alert('Você desistiu do jogo e agora virou uma galinha 🐔.\nO número da sorte era: ' + numeroDaSorte);
+        break; // Sair do loop
+      }
+        //Se chute for igual ao numero da sorte
+        if (chute == numeroDaSorte) {
+        alert('Acertou!')
+        //Se chute for maior que o numero da sorte  
+      }
+        else if (chute > numeroDaSorte) {
+        alert('Errou! o numero da sorte é menor')
+        //Se chute for menor que o numero da sorte  
+      }
+        else if (chute < numeroDaSorte) {
+        alert('Errou! o numero da sorte é maior')
+      }
+    }
+
+    if (tentativas === limiteDeTentativas && chute != numeroDaSorte) {
+      alert('Você atingiu o limite de tentativas e perdeu.\nO número da sorte era: ' + numeroDaSorte);
+    }
+  };
+    </script>
+</body>
+</html>
